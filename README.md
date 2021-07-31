@@ -5,9 +5,10 @@ cognitive performance on Cognitive Control using Stroop and other
 tasks abd varying body posture.  Original Stroop body posture
 experiments that are part of this replication efforts are from:
 
-- Smith, K. C., Davoli, C. C., Knapp, W. H., & Abrams,
+- [Smith, K. C., Davoli, C. C., Knapp, W. H., & Abrams,
   R. A. (2019). Standing enhances cognitive control and alters visual
-  search. Attention, Perception, & Psychophysics, 81(7), 2320-2329.
+  search. Attention, Perception, & Psychophysics, 81(7), 2320-2329.]
+  (https://link.springer.com/article/10.3758/s13414-019-01723-6)
 
 
 # Getting Started
