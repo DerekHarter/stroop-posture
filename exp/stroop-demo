@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-octave stroop-demo.m
