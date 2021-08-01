@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.2.0),
-    on Sat 31 Jul 2021 08:31:44 PM CDT
+    on Sun 01 Aug 2021 06:22:37 PM CDT
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -37,7 +37,7 @@ os.chdir(_thisDir)
 # Store info about the experiment session
 psychopyVersion = '2021.2.0'
 expName = 'stroop-replication'  # from the Builder filename that created this script
-expInfo = {'participant': '000', 'session': '01', 'postureConditon': ['sitting', 'standing']}
+expInfo = {'participant': '000', 'session': '01', 'posture': ['sitting', 'standing']}
 dlg = gui.DlgFromDict(dictionary=expInfo, sortKeys=False, title=expName)
 if dlg.OK == False:
     core.quit()  # user pressed cancel
@@ -320,7 +320,7 @@ for thisPractice in practice:
                 resp.keys = _resp_allKeys[-1].name  # just the last key pressed
                 resp.rt = _resp_allKeys[-1].rt
                 # was this correct?
-                if (resp.keys == str(corrAns)) or (resp.keys == corrAns):
+                if (resp.keys == str(correctAnswer)) or (resp.keys == correctAnswer):
                     resp.corr = 1
                 else:
                     resp.corr = 0
@@ -354,7 +354,7 @@ for thisPractice in practice:
     if resp.keys in ['', [], None]:  # No response was made
         resp.keys = None
         # was no response the correct answer?!
-        if str(corrAns).lower() == 'none':
+        if str(correctAnswer).lower() == 'none':
            resp.corr = 1;  # correct non-response
         else:
            resp.corr = 0;  # failed to respond (incorrectly)
@@ -622,7 +622,7 @@ for thisTrial in trials:
                 resp.keys = _resp_allKeys[-1].name  # just the last key pressed
                 resp.rt = _resp_allKeys[-1].rt
                 # was this correct?
-                if (resp.keys == str(corrAns)) or (resp.keys == corrAns):
+                if (resp.keys == str(correctAnswer)) or (resp.keys == correctAnswer):
                     resp.corr = 1
                 else:
                     resp.corr = 0
@@ -656,7 +656,7 @@ for thisTrial in trials:
     if resp.keys in ['', [], None]:  # No response was made
         resp.keys = None
         # was no response the correct answer?!
-        if str(corrAns).lower() == 'none':
+        if str(correctAnswer).lower() == 'none':
            resp.corr = 1;  # correct non-response
         else:
            resp.corr = 0;  # failed to respond (incorrectly)

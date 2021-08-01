@@ -132,6 +132,10 @@ apt install libwebkit2gtk-4.0-37 libwebkit2gtk-4.0-dev
 
 # second attempt, based on this note:
 # https://discourse.psychopy.org/t/unable-to-properly-install-psychopy-on-ubuntu-20-04/12760/8
+# so currently we have anaconda installed, but PsychoPy runs from
+# the standard ubuntu python 3 install location instead.
+# Not sure if need or worth fixing so that PsychoPy runs from
+# anaconda python installation
 apt -y install psychopy
 apt -y install python3-pip python3-wxgtk-webview4.0
 pip3 install -U psychopy
@@ -148,3 +152,8 @@ cat > /etc/security/limits.d/99-psychopylimits.conf <<EOF
 @psychtoolbox   -  memlock    unlimited
 
 EOF
+
+
+# install packages in anaconda needed for data cleaning
+# and analysis, and for pweave markdown document
+# generation

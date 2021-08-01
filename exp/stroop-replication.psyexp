@@ -84,7 +84,7 @@
       </TextComponent>
       <KeyboardComponent name="resp">
         <Param val="'z', 'm'" valType="code" updates="constant" name="allowedKeys"/>
-        <Param val="$corrAns" valType="str" updates="constant" name="correctAns"/>
+        <Param val="$correctAnswer" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -267,7 +267,7 @@
     <Routine name="instructPractice"/>
     <LoopInitiator loopType="TrialHandler" name="practice">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'text': 'red', 'letterColor': 'red', 'corrAns': 'z', 'congruent': 'cong'}, {'text': 'red', 'letterColor': 'green', 'corrAns': 'm', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'red', 'corrAns': 'z', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'green', 'corrAns': 'm', 'congruent': 'cong'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruant'}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="stroop-replication-trialtypes.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
@@ -282,7 +282,7 @@
     <Routine name="instruct"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'text': 'red', 'letterColor': 'red', 'corrAns': 'z', 'congruent': 'cong'}, {'text': 'red', 'letterColor': 'green', 'corrAns': 'm', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'red', 'corrAns': 'z', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'green', 'corrAns': 'm', 'congruent': 'cong'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incong'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruant'}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="stroop-replication-trialtypes.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[1, 2]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
