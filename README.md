@@ -96,7 +96,7 @@ the principles and best practices of open reproducable research:
 - [Alston, J. M., & Rick, J. A. (2021). A Beginner’s Guide to Conducting Reproducible Research. Bulletin of the Ecological Society of America, 102(2), 1-14.](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/bes2.1801)
 - [What is open science?](https://www.fosteropenscience.eu/content/what-open-science-introduction)
 
-![The six core principles of Open Science which guide the Open Traits Network.](https://www.researchgate.net/figure/The-six-core-principles-of-Open-Science-which-guide-the-Open-Traits-Network_fig1_332352194)
+![The six core principles of Open Science which guide the Open Traits Network.](https://www.researchgate.net/profile/Caterina-Penone/publication/332352194/figure/fig1/AS:747912753586180@1555327704672/The-six-core-principles-of-Open-Science-which-guide-the-Open-Traits-Network.png)
 
 This project repository strives to support reprodcible research
 and open science in many of the ways outlined in the above resources.
