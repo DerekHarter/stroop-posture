@@ -157,3 +157,8 @@ EOF
 # install packages in anaconda needed for data cleaning
 # and analysis, and for pweave markdown document
 # generation
+apt install -y texlive-base texlive-fonts-recommended texlive-fonts-extra texlive-bibtex-extra texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-science biber
+conda install -c conda-forge pweave pandoc pygments pandas seaborn
+chgrp -R anaconda /opt/anaconda3
+chmod 770 -R /opt/anaconda3
+

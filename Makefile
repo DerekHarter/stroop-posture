@@ -8,7 +8,7 @@
 ##              paper generation.
 ##
 .PHONY : all
-all : data
+all : data tables figures papers
 
 
 ## data       : Perform data cleaning and data
@@ -35,12 +35,12 @@ figures :
 tables :
 	cd tables && $(MAKE)
 
-## paper      : Create the paper using results and figures
+## papers     : Create the paper using results and figures
 ##              from the subprojects.
 ##
-.PHONY : paper
-paper :
-	cd paper && $(MAKE)
+.PHONY : papers
+papers :
+	cd papers && $(MAKE)
 
 
 ## clean      : DANGER: Remove all generated build products so can
@@ -51,8 +51,7 @@ paper :
 ##
 .PHONY : clean
 clean  :
-	#cd data && $(MAKE) clean && cd ../figures && $(MAKE) clean && cd ../tables && $(MAKE) clean && cd ../paper && $(MAKE) clean
-	cd data && $(MAKE) clean 
+	cd data && $(MAKE) clean  && cd ../tables && $(MAKE) clean && cd ../figures && $(MAKE) clean && cd ../papers && $(MAKE)
 
 ## help       : Get all build targets supported by this build.
 ##

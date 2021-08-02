@@ -1,3 +1,22 @@
 # emacs/vi editor backups
 *~
 *#
+
+# build product and other directories of products to ignore
+**/.ipynb_checkpoints/*
+
+# ignore LaTex Document preparation product files
+*.aux
+*.out
+*.bbl
+*.blg
+*.lof
+*.toc
+*.log
+*.equ
+.markdown-preview.html
+**/_out/*
+
+# ignore our own project generated products
+figures/*.png
+tables/*.tex
