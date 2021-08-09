@@ -12,7 +12,6 @@
 *.blg
 *.lof
 *.toc
-*.log
 *.equ
 .markdown-preview.html
 **/_out/*

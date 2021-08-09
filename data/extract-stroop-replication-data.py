@@ -35,7 +35,7 @@ unused_features = ['instr1.started', 'instr1.stopped', 'word.stopped', 'resp.sto
 # final features desired, and order we desire them in
 features = ['participant', 'posture', 'session', 'date',
             'text', 'letterColor', 'correctAnswer', 'congruent',
-            'trials.thisRepN', 'trials.thisTrialN', 'trials.thisN', 'trials.thisIndex',
+            'trial_loop.thisRepN', 'trials.thisTrialN', 'trials.thisN', 'trials.thisIndex',
 	    'word.started', 'resp.keys', 'resp.corr', 'resp.rt', 'resp.started']
 
 
@@ -55,7 +55,7 @@ def extract_stroop_replication_data():
     stroop_replication_df = None
     
     # find files matching raw PsychoPy subject trial/data name
-    file_pattern = "[0-9][0-9][0-9]_*_*_*"
+    file_pattern = "[0-9][0-9][0-9][0-9]_*_*_*"
     raw_data_pattern = data_dir + "/" + file_pattern + ".csv"
     raw_data_file_list = glob.glob(raw_data_pattern)
     raw_data_file_list.sort()
@@ -63,7 +63,7 @@ def extract_stroop_replication_data():
         #print('Processing file <%s>' % raw_data_file)
         # read csv into a dataframe
         subject_df = pd.read_csv(raw_data_file)
-
+        
         # clean a bit, drop all rows where trials.thisRepN is empty, this
         # removes practice trials and rows of start/stop info leaving only
         # actual trials
