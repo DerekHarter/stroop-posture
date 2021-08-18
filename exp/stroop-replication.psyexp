@@ -7,7 +7,7 @@
     <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
     <Param val="'../data/%s_%s' % (expInfo['participant'], expInfo['date'])" valType="code" updates="None" name="Data filename"/>
     <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
-    <Param val="{'participant': '0000', 'session': '01', 'posture': &quot;['sitting', 'standing']&quot;}" valType="code" updates="None" name="Experiment info"/>
+    <Param val="{'participant': '1000', 'session': '01'}" valType="code" updates="None" name="Experiment info"/>
     <Param val="True" valType="bool" updates="None" name="Force stereo"/>
     <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
     <Param val="html" valType="str" updates="None" name="HTML path"/>
@@ -57,6 +57,48 @@
   </Settings>
   <Routines>
     <Routine name="trial">
+      <CodeComponent name="correctAnswerInit">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((letterColor === &quot;red&quot;)) {&amp;#10;    expInfo[&quot;correctAnswer&quot;] = correctKeyRed;&amp;#10;    correctAnswer = correctKeyRed;&amp;#10;} else {&amp;#10;    if ((letterColor === &quot;green&quot;)) {&amp;#10;        expInfo[&quot;correctAnswer&quot;] = correctKeyGreen;&amp;#10;        correctAnswer = correctKeyGreen;&amp;#10;    } else {&amp;#10;        console.log(&quot;Error, unexpected letterColor:&quot;, letterColor);&amp;#10;        sys.exit(0);&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if letterColor == 'red':&amp;#10;    expInfo['correctAnswer'] = correctKeyRed&amp;#10;    correctAnswer = correctKeyRed&amp;#10;elif letterColor == 'green':&amp;#10;    expInfo['correctAnswer'] = correctKeyGreen&amp;#10;    correctAnswer = correctKeyGreen&amp;#10;else:&amp;#10;    print(&quot;Error, unexpected letterColor:&quot;, letterColor)&amp;#10;    sys.exit(0)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="correctAnswerInit" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="fixation">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.1" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="fixation" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="0.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="+" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
       <TextComponent name="word">
         <Param val="$letterColor" valType="str" updates="set every repeat" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -83,7 +125,7 @@
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <KeyboardComponent name="resp">
-        <Param val="'z', 'm'" valType="code" updates="constant" name="allowedKeys"/>
+        <Param val="'left', 'right'" valType="code" updates="constant" name="allowedKeys"/>
         <Param val="$correctAnswer" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
@@ -100,79 +142,26 @@
         <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
-      <TextComponent name="fixation">
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.1" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="fixation" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="0.5" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="+" valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
-    </Routine>
-    <Routine name="instruct">
-      <TextComponent name="instrText">
-        <Param val="$[1, 1, 1]" valType="str" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="" valType="str" updates="constant" name="flip"/>
-        <Param val="Arial" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.1" valType="code" updates="constant" name="letterHeight"/>
-        <Param val="instrText" valType="code" updates="constant" name="name"/>
-        <Param val="1" valType="code" updates="constant" name="opacity"/>
-        <Param val="0" valType="code" updates="constant" name="ori"/>
-        <Param val="[0, 0]" valType="code" updates="constant" name="pos"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Take a small break before continuing.&amp;#10;&amp;#10;OK. Ready for the real thing?&amp;#10;&amp;#10;Remember, ignore the word itself; press:&amp;#10;z for red LETTERS&amp;#10;m for green LETTERS&amp;#10;(Esc will quit)&amp;#10;&amp;#10;Press any key to continue" valType="str" updates="constant" name="text"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="code" updates="constant" name="wrapWidth"/>
-      </TextComponent>
-      <KeyboardComponent name="ready">
-        <Param val="" valType="code" updates="constant" name="allowedKeys"/>
-        <Param val="thisTrial.corrAns" valType="str" updates="constant" name="correctAns"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="ready" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="nothing" valType="str" updates="constant" name="store"/>
-        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-      </KeyboardComponent>
     </Routine>
     <Routine name="instructPractice">
-      <TextComponent name="instr1">
+      <CodeComponent name="instructPracticeInit">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="practiceLoopIteration = 1" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="practiceLoopIteration = 1;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if correctKeyRed == 'left':&amp;#10;    practiceInstructions=&quot;&quot;&quot;&amp;#10;In the %s posture&amp;#10;&amp;#10;Please press;&amp;#10;%s for red XXXX LETTERS     %s for green XXXX LETTERS&amp;#10;&amp;#10;Let's start with a few practice trials&amp;#10;This is block %d out of 2 practice blocks&amp;#10;&amp;#10;Please respond as quickly and accuractly as possible to the color&amp;#10;(red or green) in which the  letter-string appeared.  Ignore all other&amp;#10;aspects of the letter-string, including its meaning.&amp;#10;&amp;#10;For example, if you see RED, respond &amp;#10;with %s button for green letter-strings.&amp;#10;&amp;#10;Press any key to continue&amp;#10;&quot;&quot;&quot; % (posture, correctKeyRed, correctKeyGreen, practiceLoopIteration, correctKeyGreen)&amp;#10;else:&amp;#10;    practiceInstructions=&quot;&quot;&quot;&amp;#10;In the %s posture&amp;#10;&amp;#10;Please press;&amp;#10;%s for green LETTERS    %s for red LETTERS&amp;#10;&amp;#10;Let's start with a few practice trials&amp;#10;This is block %d out of 2 practice blocks&amp;#10;&amp;#10;Please respond as quickly and accuractly as possible to the color&amp;#10;(red or green) in which the  letter-string appeared.  Ignore all other&amp;#10;aspects of the letter-string, including its meaning.&amp;#10;&amp;#10;For example, if you see GREEN, respond &amp;#10;with %s button for red letter-strings.&amp;#10;&amp;#10;Press any key to continue&amp;#10;&quot;&quot;&quot; % (posture, correctKeyGreen, correctKeyRed, practiceLoopIteration, correctKeyRed)&amp;#10;    " valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="practiceLoopIteration += 1;&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="practiceLoopIteration += 1" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="instructPracticeInit" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="instructPracticeText">
         <Param val="white" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -182,7 +171,7 @@
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="0.1" valType="code" updates="constant" name="letterHeight"/>
-        <Param val="instr1" valType="code" updates="constant" name="name"/>
+        <Param val="instructPracticeText" valType="code" updates="constant" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
         <Param val="[0, 0]" valType="code" updates="constant" name="pos"/>
@@ -193,18 +182,18 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Please press;&amp;#10;z for red LETTERS&amp;#10;m for green LETTERS&amp;#10;(Esc will quit)&amp;#10;&amp;#10;Let's start with a few practice trials&amp;#10;&amp;#10;Press any key to continue" valType="str" updates="constant" name="text"/>
+        <Param val="$practiceInstructions" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
-        <Param val="" valType="code" updates="constant" name="wrapWidth"/>
+        <Param val="10" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="ready1">
+      <KeyboardComponent name="instructPracticeReady">
         <Param val="" valType="code" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="ready1" valType="code" updates="None" name="name"/>
+        <Param val="instructPracticeReady" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -243,7 +232,165 @@
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
     </Routine>
-    <Routine name="feedback_trial">
+    <Routine name="initializeExperiment">
+      <CodeComponent name="initializeCouterBalancing">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="# create conditions based on participant number&amp;#10;participantId = int(expInfo['participant'])&amp;#10;&amp;#10;# 4 condition ranges&amp;#10;if participantId &gt;= 1000 and participantId &lt;= 1999:&amp;#10;    # condition 1 start standing use red-green l/r keymap&amp;#10;    posture = 'standing'&amp;#10;    correctKeyRed = 'left'&amp;#10;    correctKeyGreen = 'right'&amp;#10;elif participantId &gt;= 2000 and participantId &lt;= 2999:&amp;#10;    # condition 2 start standing use green-red l/r keymap&amp;#10;    posture = 'standing'&amp;#10;    correctKeyRed = 'right'&amp;#10;    correctKeyGreen = 'left'&amp;#10;elif participantId &gt;= 3000 and participantId &lt;= 3999:&amp;#10;    # condition 3 start sitting use red-green l/r keymap&amp;#10;    posture = 'sitting'&amp;#10;    correctKeyRed = 'left'&amp;#10;    correctKeyGreen = 'right'&amp;#10;elif participantId &gt;= 4000 and participantId &lt;= 4999:&amp;#10;    # condition 4 start sitting use green-red l/r keymap&amp;#10;    posture = 'sitting'&amp;#10;    correctKeyRed = 'right'&amp;#10;    correctKeyGreen = 'left'&amp;#10;else:&amp;#10;    # croak immediately if experimenter gives invalid&amp;#10;    # participant id, maybe make this for testing?&amp;#10;    print(&quot;Invalid participant id entered: &quot;, participantId)&amp;#10;    print(&quot;Use range 1000-4999 for participant&quot;)&amp;#10;    sys.exit(0)&amp;#10;&amp;#10;# put correct keys in experiment info so saved in&amp;#10;# trial output&amp;#10;expInfo['posture'] = posture&amp;#10;expInfo['correctKeyRed'] = correctKeyRed&amp;#10;expInfo['correctKeyGreen'] = correctKeyGreen" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="participantId = Number.parseInt(expInfo[&quot;participant&quot;]);&amp;#10;if (((participantId &gt;= 1000) &amp;&amp; (participantId &lt;= 1999))) {&amp;#10;    posture = &quot;standing&quot;;&amp;#10;    correctKeyRed = &quot;left&quot;;&amp;#10;    correctKeyGreen = &quot;right&quot;;&amp;#10;} else {&amp;#10;    if (((participantId &gt;= 2000) &amp;&amp; (participantId &lt;= 2999))) {&amp;#10;        posture = &quot;standing&quot;;&amp;#10;        correctKeyRed = &quot;right&quot;;&amp;#10;        correctKeyGreen = &quot;left&quot;;&amp;#10;    } else {&amp;#10;        if (((participantId &gt;= 3000) &amp;&amp; (participantId &lt;= 3999))) {&amp;#10;            posture = &quot;sitting&quot;;&amp;#10;            correctKeyRed = &quot;left&quot;;&amp;#10;            correctKeyGreen = &quot;right&quot;;&amp;#10;        } else {&amp;#10;            if (((participantId &gt;= 4000) &amp;&amp; (participantId &lt;= 4999))) {&amp;#10;                posture = &quot;sitting&quot;;&amp;#10;                correctKeyRed = &quot;right&quot;;&amp;#10;                correctKeyGreen = &quot;left&quot;;&amp;#10;            } else {&amp;#10;                console.log(&quot;Invalid participant id entered: &quot;, participantId);&amp;#10;                console.log(&quot;Use range 1000-4999 for participant&quot;);&amp;#10;                sys.exit(0);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;}&amp;#10;expInfo[&quot;posture&quot;] = posture;&amp;#10;expInfo[&quot;correctKeyRed&quot;] = correctKeyRed;&amp;#10;expInfo[&quot;correctKeyGreen&quot;] = correctKeyGreen;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="initializeCouterBalancing" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="setupPosture">
+      <CodeComponent name="setupPostureInit">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="setupPostureInstructions = &quot;&quot;&quot;&amp;#10;Before beginning, the experiment&amp;#10;supervisor will position you in the&amp;#10;correct initial posture.&amp;#10;&amp;#10;Posture: %s&amp;#10;&amp;#10;Once you are ready, press any key&amp;#10;to begin practicing the  experiment.&amp;#10;&quot;&quot;&quot; % (posture.upper())" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="setupPostureInit" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="setupPostureText">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.1" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="setupPostureText" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$setupPostureInstructions" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="setupPostureReady">
+        <Param val="" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="setupPostureReady" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <SoundComponent name="setupPostureAlert">
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="hamming"/>
+        <Param val="setupPostureAlert" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="F" valType="str" updates="constant" name="sound"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="1" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+        <Param val="1000" valType="num" updates="constant" name="volume"/>
+      </SoundComponent>
+    </Routine>
+    <Routine name="instructTrial">
+      <CodeComponent name="instructTrialInit">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="trialLoopIteration = 1" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="trialLoopIteration = 1;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if correctKeyRed == 'left':&amp;#10;    trialInstructions=&quot;&quot;&quot;&amp;#10;Take a small break and then CHECK &amp;#10;your posture before continuing&amp;#10;&amp;#10;You should still be in the %s posture&amp;#10;&amp;#10;OK. Ready for the real thing?&amp;#10;&amp;#10;Remember, ignore the word itself; press:&amp;#10;%s for red LETTERS&amp;#10;%s for green LETTERS&amp;#10;(Esc will quit)&amp;#10;&amp;#10;This is block %d out of 4 experiment blocks&amp;#10;&amp;#10;Press any key to continue&amp;#10;&quot;&quot;&quot; % (posture, correctKeyRed, correctKeyGreen, trialLoopIteration)&amp;#10;else:&amp;#10;    trialInstructions=&quot;&quot;&quot;&amp;#10;Take a small break and then CHECK &amp;#10;your posture before continuing&amp;#10;&amp;#10;You should still be in the %s posture&amp;#10;&amp;#10;OK. Ready for the real thing?&amp;#10;&amp;#10;Remember, ignore the word itself; press:&amp;#10;%s for green LETTERS&amp;#10;%s for red LETTERS&amp;#10;(Esc will quit)&amp;#10;&amp;#10;This is block %d out of 4 experiment blocks&amp;#10;&amp;#10;Press any key to continue&amp;#10;&quot;&quot;&quot; % (posture, correctKeyGreen, correctKeyRed, trialLoopIteration)&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="trialLoopIteration += 1;&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="trialLoopIteration += 1" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="instructTrialInit" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="instructTrialText">
+        <Param val="$[1, 1, 1]" valType="str" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="" valType="str" updates="constant" name="flip"/>
+        <Param val="Arial" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.1" valType="code" updates="constant" name="letterHeight"/>
+        <Param val="instructTrialText" valType="code" updates="constant" name="name"/>
+        <Param val="1" valType="code" updates="constant" name="opacity"/>
+        <Param val="0" valType="code" updates="constant" name="ori"/>
+        <Param val="[0, 0]" valType="code" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$trialInstructions" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="instructTrialReady">
+        <Param val="" valType="code" updates="constant" name="allowedKeys"/>
+        <Param val="thisTrial.corrAns" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="instructTrialReady" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="nothing" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="trialFeedback">
       <CodeComponent name="message">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
@@ -302,14 +449,14 @@
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
     </Routine>
-    <Routine name="feedback_practice">
-      <CodeComponent name="message_2">
+    <Routine name="practiceFeedback">
+      <CodeComponent name="feedbackPracticeInit">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="#msg variable just needs some value at start&amp;#10;msg=''&amp;#10;sound_hz=60" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if resp.corr:#stored on last run routine&amp;#10;  msg=&quot;Correct! RT=%.3f&quot; %(resp.rt)&amp;#10;  sound_hz=60&amp;#10;else:&amp;#10;  msg=&quot;Oops! That was wrong&quot;&amp;#10;  sound_hz=440" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if resp.corr:#stored on last run routine&amp;#10;  msg=&quot;Correct! RT=%.3f&quot; %(resp.rt)&amp;#10;  sound_hz=60&amp;#10;else:&amp;#10;  msg=&quot;Oops! That was wrong.\nPlease respond as fast and accuractly as you can.&quot;&amp;#10;  sound_hz=440" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -318,9 +465,9 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="message_2" valType="code" updates="None" name="name"/>
+        <Param val="feedbackPracticeInit" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <TextComponent name="feedback_2">
+      <TextComponent name="feedbackPracticeMessage">
         <Param val="$[1,1,1]" valType="str" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -330,7 +477,7 @@
         <Param val="Arial" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="0.1" valType="code" updates="constant" name="letterHeight"/>
-        <Param val="feedback_2" valType="code" updates="constant" name="name"/>
+        <Param val="feedbackPracticeMessage" valType="code" updates="constant" name="name"/>
         <Param val="1" valType="code" updates="constant" name="opacity"/>
         <Param val="0" valType="code" updates="constant" name="ori"/>
         <Param val="[0, 0]" valType="code" updates="constant" name="pos"/>
@@ -345,11 +492,11 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <SoundComponent name="sound_1">
+      <SoundComponent name="feedbackPracticeSound">
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
-        <Param val="sound_1" valType="code" updates="None" name="name"/>
+        <Param val="feedbackPracticeSound" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="$sound_hz" valType="str" updates="constant" name="sound"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
@@ -361,8 +508,44 @@
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
     </Routine>
-    <Routine name="break_1">
-      <TextComponent name="breakText">
+    <Routine name="initializeExperiment2">
+      <CodeComponent name="initializeCounterbalancing2">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((posture === &quot;sitting&quot;)) {&amp;#10;    posture = &quot;standing&quot;;&amp;#10;} else {&amp;#10;    if ((posture === &quot;standing&quot;)) {&amp;#10;        posture = &quot;sitting&quot;;&amp;#10;    } else {&amp;#10;        console.log(&quot;unknown posture: &quot;, posture);&amp;#10;        sys.exit(0);&amp;#10;    }&amp;#10;}&amp;#10;expInfo[&quot;posture&quot;] = posture;&amp;#10;practiceLoopIteration = 1;&amp;#10;trialLoopIteration = 1;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if posture == 'sitting':&amp;#10;    posture = 'standing'&amp;#10;elif posture == 'standing':&amp;#10;    posture = 'sitting'&amp;#10;else:&amp;#10;    print(&quot;unknown posture: &quot;, posture)&amp;#10;    sys.exit(0)&amp;#10;    &amp;#10;expInfo['posture'] = posture&amp;#10;&amp;#10;practiceLoopIteration = 1&amp;#10;trialLoopIteration = 1" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="initializeCounterbalancing2" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="setupPosture2">
+      <CodeComponent name="setupPosture2Init">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="setupPosture2Instructions = &quot;&quot;&quot;&amp;#10;Before continuing, the experiment&amp;#10;supervisor will position you in the&amp;#10;next experiment posture:&amp;#10;&amp;#10;Posture: %s&amp;#10;&amp;#10;Once you are ready, press any key&amp;#10;to begin practicing the experiment.&amp;#10;&quot;&quot;&quot; % (posture.upper())" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="setupPosture2Init" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="setupPosture2Text">
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
@@ -372,7 +555,7 @@
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
         <Param val="0.1" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="breakText" valType="code" updates="None" name="name"/>
+        <Param val="setupPosture2Text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
@@ -381,37 +564,65 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="10.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="We will now take a 10 second break,&amp;#10;&amp;#10;or press a key when ready to continue." valType="str" updates="constant" name="text"/>
+        <Param val="$setupPosture2Instructions" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="ready2">
+      <KeyboardComponent name="setupPosture2Ready">
         <Param val="" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="ready2" valType="code" updates="None" name="name"/>
+        <Param val="setupPosture2Ready" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="10.0" valType="code" updates="constant" name="stopVal"/>
-        <Param val="nothing" valType="str" updates="constant" name="store"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
+      <SoundComponent name="setupPosture2Sound">
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="hamming"/>
+        <Param val="setupPosture2Sound" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="posture-alert.wav" valType="str" updates="constant" name="sound"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+        <Param val="1" valType="num" updates="constant" name="volume"/>
+      </SoundComponent>
     </Routine>
   </Routines>
   <Flow>
+    <Routine name="initializeExperiment"/>
+    <Routine name="setupPosture"/>
+    <LoopInitiator loopType="TrialHandler" name="practice_loop">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="2" valType="num"/>
+      <Param name="name" updates="None" val="practice_loop" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
     <Routine name="instructPractice"/>
     <LoopInitiator loopType="TrialHandler" name="practice">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'text': 'XXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="stroop-replication-trialtypes.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
@@ -421,8 +632,9 @@
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
     <Routine name="trial"/>
-    <Routine name="feedback_practice"/>
+    <Routine name="practiceFeedback"/>
     <LoopTerminator name="practice"/>
+    <LoopTerminator name="practice_loop"/>
     <LoopInitiator loopType="TrialHandler" name="trial_loop">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
       <Param name="conditions" updates="None" val="None" valType="str"/>
@@ -430,14 +642,14 @@
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="loopType" updates="None" val="sequential" valType="str"/>
-      <Param name="nReps" updates="None" val="2" valType="num"/>
+      <Param name="nReps" updates="None" val="4" valType="num"/>
       <Param name="name" updates="None" val="trial_loop" valType="code"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
-    <Routine name="instruct"/>
+    <Routine name="instructTrial"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
       <Param name="Selected rows" updates="None" val="" valType="str"/>
-      <Param name="conditions" updates="None" val="[{'text': 'XXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'correctAnswer': 'z', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'correctAnswer': 'm', 'congruent': 'congruent'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="stroop-replication-trialtypes.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[1, 2]" valType="num"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
@@ -447,9 +659,65 @@
       <Param name="random seed" updates="None" val="" valType="code"/>
     </LoopInitiator>
     <Routine name="trial"/>
-    <Routine name="feedback_trial"/>
+    <Routine name="trialFeedback"/>
     <LoopTerminator name="trials"/>
     <LoopTerminator name="trial_loop"/>
+    <Routine name="initializeExperiment2"/>
+    <Routine name="setupPosture2"/>
+    <LoopInitiator loopType="TrialHandler" name="practice_loop2">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="2" valType="num"/>
+      <Param name="name" updates="None" val="practice_loop2" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="instructPractice"/>
+    <LoopInitiator loopType="TrialHandler" name="practice2">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="stroop-replication-trialtypes.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="practice2" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <Routine name="practiceFeedback"/>
+    <LoopTerminator name="practice2"/>
+    <LoopTerminator name="practice_loop2"/>
+    <LoopInitiator loopType="TrialHandler" name="trial_loop2">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="4" valType="num"/>
+      <Param name="name" updates="None" val="trial_loop2" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="instructTrial"/>
+    <LoopInitiator loopType="TrialHandler" name="trials2">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'XXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'red', 'congruent': 'neutral'}, {'text': 'XXXXX', 'letterColor': 'green', 'congruent': 'neutral'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'green', 'letterColor': 'red', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'green', 'congruent': 'incongruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}, {'text': 'red', 'letterColor': 'red', 'congruent': 'congruent'}, {'text': 'green', 'letterColor': 'green', 'congruent': 'congruent'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="stroop-replication-trialtypes.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="trials2" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="trial"/>
+    <Routine name="trialFeedback"/>
+    <LoopTerminator name="trials2"/>
+    <LoopTerminator name="trial_loop2"/>
     <Routine name="thanks"/>
   </Flow>
 </PsychoPy2experiment>
