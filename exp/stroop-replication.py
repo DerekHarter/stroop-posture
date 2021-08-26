@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2021.2.0),
-    on Wed 18 Aug 2021 01:19:25 PM CDT
+    on Thu 26 Aug 2021 09:12:40 AM CDT
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -198,7 +198,7 @@ trialLoopIteration = 1
 instructTrialText = visual.TextStim(win=win, name='instructTrialText',
     text='',
     font='Arial',
-    pos=[0, 0], height=0.1, wrapWidth=None, ori=0, 
+    pos=[0, 0], height=0.1, wrapWidth=10, ori=0, 
     color=[1, 1, 1], colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -251,7 +251,7 @@ setupPosture2Text = visual.TextStim(win=win, name='setupPosture2Text',
     languageStyle='LTR',
     depth=-1.0);
 setupPosture2Ready = keyboard.Keyboard()
-setupPosture2Sound = sound.Sound('posture-alert.wav', secs=-1, stereo=True, hamming=True,
+setupPosture2Sound = sound.Sound('F', secs=-1, stereo=True, hamming=True,
     name='setupPosture2Sound')
 setupPosture2Sound.setVolume(1.0)
 
@@ -307,7 +307,7 @@ trialLoopIteration = 1
 instructTrialText = visual.TextStim(win=win, name='instructTrialText',
     text='',
     font='Arial',
-    pos=[0, 0], height=0.1, wrapWidth=None, ori=0, 
+    pos=[0, 0], height=0.1, wrapWidth=10, ori=0, 
     color=[1, 1, 1], colorSpace='rgb', opacity=1, 
     languageStyle='LTR',
     depth=-1.0);
@@ -556,20 +556,17 @@ for thisPractice_loop in practice_loop:
     In the %s posture
     
     Please press;
-    %s for red XXXX LETTERS     %s for green XXXX LETTERS
-    
-    Let's start with a few practice trials
-    This is block %d out of 2 practice blocks
+    %s for red  LETTERS     %s for green  LETTERS
     
     Please respond as quickly and accuractly as possible to the color
     (red or green) in which the  letter-string appeared.  Ignore all other
     aspects of the letter-string, including its meaning.
     
-    For example, if you see RED, respond 
-    with %s button for green letter-strings.
+    Let's start with a few practice trials
+    This is block %d out of 2 practice blocks
     
-    Press any key to continue
-    """ % (posture, correctKeyRed, correctKeyGreen, practiceLoopIteration, correctKeyGreen)
+    Press any key to start
+    """ % (posture, correctKeyRed, correctKeyGreen, practiceLoopIteration)
     else:
         practiceInstructions="""
     In the %s posture
@@ -577,18 +574,15 @@ for thisPractice_loop in practice_loop:
     Please press;
     %s for green LETTERS    %s for red LETTERS
     
-    Let's start with a few practice trials
-    This is block %d out of 2 practice blocks
-    
     Please respond as quickly and accuractly as possible to the color
     (red or green) in which the  letter-string appeared.  Ignore all other
     aspects of the letter-string, including its meaning.
     
-    For example, if you see GREEN, respond 
-    with %s button for red letter-strings.
+    Let's start with a few practice trials
+    This is block %d out of 2 practice blocks
     
-    Press any key to continue
-    """ % (posture, correctKeyGreen, correctKeyRed, practiceLoopIteration, correctKeyRed)
+    Press any key to start
+    """ % (posture, correctKeyGreen, correctKeyRed, practiceLoopIteration)
         
     instructPracticeText.setText(practiceInstructions)
     instructPracticeReady.keys = []
@@ -993,39 +987,41 @@ for thisTrial_loop in trial_loop:
     # update component parameters for each repeat
     if correctKeyRed == 'left':
         trialInstructions="""
-    Take a small break and then CHECK 
-    your posture before continuing
+    Take a small break and then CHECK  your posture before continuing
     
     You should still be in the %s posture
     
     OK. Ready for the real thing?
     
     Remember, ignore the word itself; press:
-    %s for red LETTERS
-    %s for green LETTERS
-    (Esc will quit)
+    %s for red LETTERS   %s for green LETTERS
+    
+    Please respond as quickly and accuractly as possible to the color
+    (red or green) in which the  letter-string appeared.  Ignore all other
+    aspects of the letter-string, including its meaning.
     
     This is block %d out of 4 experiment blocks
     
-    Press any key to continue
+    Press any key to start
     """ % (posture, correctKeyRed, correctKeyGreen, trialLoopIteration)
     else:
         trialInstructions="""
-    Take a small break and then CHECK 
-    your posture before continuing
+    Take a small break and then CHECK  your posture before continuing
     
     You should still be in the %s posture
     
     OK. Ready for the real thing?
     
     Remember, ignore the word itself; press:
-    %s for green LETTERS
-    %s for red LETTERS
-    (Esc will quit)
+    %s for green LETTERS   %s for red LETTERS
+    
+    Please respond as quickly and accuractly as possible to the color
+    (red or green) in which the  letter-string appeared.  Ignore all other
+    aspects of the letter-string, including its meaning.
     
     This is block %d out of 4 experiment blocks
     
-    Press any key to continue
+    Press any key to start
     """ % (posture, correctKeyGreen, correctKeyRed, trialLoopIteration)
     
     
@@ -1487,7 +1483,7 @@ setupPosture2Text.setText(setupPosture2Instructions)
 setupPosture2Ready.keys = []
 setupPosture2Ready.rt = []
 _setupPosture2Ready_allKeys = []
-setupPosture2Sound.setSound('posture-alert.wav', hamming=True)
+setupPosture2Sound.setSound('F', secs=5, hamming=True)
 setupPosture2Sound.setVolume(1.0, log=False)
 # keep track of which components have finished
 setupPosture2Components = [setupPosture2Text, setupPosture2Ready, setupPosture2Sound]
@@ -1544,12 +1540,20 @@ while continueRoutine:
             # a response ends the routine
             continueRoutine = False
     # start/stop setupPosture2Sound
-    if setupPosture2Sound.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+    if setupPosture2Sound.status == NOT_STARTED and tThisFlip >= 1-frameTolerance:
         # keep track of start time/frame for later
         setupPosture2Sound.frameNStart = frameN  # exact frame index
         setupPosture2Sound.tStart = t  # local t and not account for scr refresh
         setupPosture2Sound.tStartRefresh = tThisFlipGlobal  # on global time
         setupPosture2Sound.play(when=win)  # sync with win flip
+    if setupPosture2Sound.status == STARTED:
+        # is it time to stop? (based on global clock, using actual start)
+        if tThisFlipGlobal > setupPosture2Sound.tStartRefresh + 5-frameTolerance:
+            # keep track of stop time/frame for later
+            setupPosture2Sound.tStop = t  # not accounting for scr refresh
+            setupPosture2Sound.frameNStop = frameN  # exact frame index
+            win.timeOnFlip(setupPosture2Sound, 'tStopRefresh')  # time at next scr refresh
+            setupPosture2Sound.stop()
     
     # check for quit (typically the Esc key)
     if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1616,20 +1620,17 @@ for thisPractice_loop2 in practice_loop2:
     In the %s posture
     
     Please press;
-    %s for red XXXX LETTERS     %s for green XXXX LETTERS
-    
-    Let's start with a few practice trials
-    This is block %d out of 2 practice blocks
+    %s for red  LETTERS     %s for green  LETTERS
     
     Please respond as quickly and accuractly as possible to the color
     (red or green) in which the  letter-string appeared.  Ignore all other
     aspects of the letter-string, including its meaning.
     
-    For example, if you see RED, respond 
-    with %s button for green letter-strings.
+    Let's start with a few practice trials
+    This is block %d out of 2 practice blocks
     
-    Press any key to continue
-    """ % (posture, correctKeyRed, correctKeyGreen, practiceLoopIteration, correctKeyGreen)
+    Press any key to start
+    """ % (posture, correctKeyRed, correctKeyGreen, practiceLoopIteration)
     else:
         practiceInstructions="""
     In the %s posture
@@ -1637,18 +1638,15 @@ for thisPractice_loop2 in practice_loop2:
     Please press;
     %s for green LETTERS    %s for red LETTERS
     
-    Let's start with a few practice trials
-    This is block %d out of 2 practice blocks
-    
     Please respond as quickly and accuractly as possible to the color
     (red or green) in which the  letter-string appeared.  Ignore all other
     aspects of the letter-string, including its meaning.
     
-    For example, if you see GREEN, respond 
-    with %s button for red letter-strings.
+    Let's start with a few practice trials
+    This is block %d out of 2 practice blocks
     
-    Press any key to continue
-    """ % (posture, correctKeyGreen, correctKeyRed, practiceLoopIteration, correctKeyRed)
+    Press any key to start
+    """ % (posture, correctKeyGreen, correctKeyRed, practiceLoopIteration)
         
     instructPracticeText.setText(practiceInstructions)
     instructPracticeReady.keys = []
@@ -2053,39 +2051,41 @@ for thisTrial_loop2 in trial_loop2:
     # update component parameters for each repeat
     if correctKeyRed == 'left':
         trialInstructions="""
-    Take a small break and then CHECK 
-    your posture before continuing
+    Take a small break and then CHECK  your posture before continuing
     
     You should still be in the %s posture
     
     OK. Ready for the real thing?
     
     Remember, ignore the word itself; press:
-    %s for red LETTERS
-    %s for green LETTERS
-    (Esc will quit)
+    %s for red LETTERS   %s for green LETTERS
+    
+    Please respond as quickly and accuractly as possible to the color
+    (red or green) in which the  letter-string appeared.  Ignore all other
+    aspects of the letter-string, including its meaning.
     
     This is block %d out of 4 experiment blocks
     
-    Press any key to continue
+    Press any key to start
     """ % (posture, correctKeyRed, correctKeyGreen, trialLoopIteration)
     else:
         trialInstructions="""
-    Take a small break and then CHECK 
-    your posture before continuing
+    Take a small break and then CHECK  your posture before continuing
     
     You should still be in the %s posture
     
     OK. Ready for the real thing?
     
     Remember, ignore the word itself; press:
-    %s for green LETTERS
-    %s for red LETTERS
-    (Esc will quit)
+    %s for green LETTERS   %s for red LETTERS
+    
+    Please respond as quickly and accuractly as possible to the color
+    (red or green) in which the  letter-string appeared.  Ignore all other
+    aspects of the letter-string, including its meaning.
     
     This is block %d out of 4 experiment blocks
     
-    Press any key to continue
+    Press any key to start
     """ % (posture, correctKeyGreen, correctKeyRed, trialLoopIteration)
     
     
