@@ -24,12 +24,23 @@ feature/column names.
 
 # information used in cleaning raw data trials for extraction
 # list of practice columns/features to be dropped when extracting
-practice_features = ['practice.thisRepN', 'practice.thisTrialN', 'practice.thisN', 'practice.thisIndex']
+practice_features = ['practice_loop.thisRepN', 'practice_loop.thisTrialN', 'practice_loop.thisN', 'practice_loop.thisIndex',
+                     'practice.thisRepN', 'practice.thisTrialN', 'practice.thisN', 'practice.thisIndex',
+                     'practice_loop2.thisRepN', 'practice_loop2.thisTrialN', 'practice_loop2.thisN', 'practice_loop2.thisIndex',
+                     'practice2.thisRepN', 'practice2.thisTrialN', 'practice2.thisN', 'practice2.thisIndex']
 
 # list of unuseful features to drop
-unused_features = ['instr1.started', 'instr1.stopped', 'word.stopped', 'resp.stopped',
-                   'feedback_2.started', 'feedback_2.stopped', 'instrText.started',
-                   'instrText.stopped', 'thanksText.started', 'thanksText.stopped',
+unused_features = ['trial_loop2.thisRepN', 'trials2.thisTrialN', 'trials2.thisN', 'trials2.thisIndex',
+                   'feedbackPracticeMessage.started', 'feedbackPracticeMessage.stopped',
+                   'feedbackPracticeSound.started', 'feedbackPracticeSound.stopped',
+                   'instructTrialText.started', 'instructTrialText.stopped',
+                   'feedback_3.started', 'feedback_3.stopped',
+                   'sound_2.started', 'sound_2.stopped', 'setupPosture2Text.started',
+                   'setupPosture2Text.stopped', 'setupPosture2Ready.keys',
+                   'setupPosture2Ready.rt', 'setupPosture2Ready.started',
+                   'setupPosture2Ready.stopped', 'setupPosture2Sound.started',
+                   'setupPosture2Sound.stopped',
+                   'thanksText.started', 'thanksText.stopped',
                    'expName', 'psychopyVersion', 'frameRate']
 
 # final features desired, and order we desire them in
